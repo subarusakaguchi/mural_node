@@ -1,11 +1,5 @@
 module.exports = {
-    posts: [
-        {
-            id: "sdjhnfljan",
-            title: "Primeiro post do mural",
-            description: "Descrição qualquer"
-        }
-    ],
+    posts: [],
 
     getAll() {
         return this.posts

@@ -44,6 +44,8 @@ function newPost() {
         fetch('http://192.168.0.16:3000/api/new', options).then(res => {
             console.log(res)
             updatePosts()
+            document.getElementById('title').value = ''
+            document.getElementById('description').value = ''
         })
     }
 }

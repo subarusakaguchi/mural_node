@@ -10,7 +10,6 @@ router.get('/all', (req, res) => {
 })
 
 router.post('/new', express.json(), (req, res) => {
-    console.log(req)
     let title = req.body.title
     let description = req.body.description
 
