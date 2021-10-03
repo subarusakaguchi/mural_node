@@ -12,21 +12,14 @@
     <section class="container">
         <h1>Criar novo post</h1>
         <div>
-            <input type="text" name="title" id="title">
-            <input type="text" name="description" id="description">
+            <input type="text" name="title" id="title" placeholder="Título">
+            <input type="text" name="description" id="description" placeholder="Descrição">
             <button onclick="newPost()">Post</button>
         </div>
 
-        <div class="mt-4">
-            <h2>Mural</h2>
-            <div class="card mt-2">
-                <div class="card-header" type='button' data-bs-toggle="collapse" data-bs-target="#cardBody">
-                    Título
-                </div>
-                <div id='cardBody' class="card-body collapse">
-                    Descrição
-                </div>
-            </div>
+        <h2 class="mt-4">Mural</h2>
+        <div id="posts" class="mt-3">
+            
         </div>
     </section>
 
