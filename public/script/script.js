@@ -17,7 +17,10 @@ function updatePosts() {
                     <div id='cardBody${post.id}' class="card-body collapse">
                         <p>${post.description}</p>
                     </div>
-                </div>`
+                    <div class="card-footer">
+                        <button onclick="tempId(this)" data-bs-toggle="modal" data-bs-target="#modal-erase" class="btn btn-warning text-white fw-bold">Excluir Post</button>
+                    </div>
+                    </div>`
 
             postElements += postElement
         })
@@ -29,15 +32,38 @@ function updatePosts() {
 function newPost() {
     let title = document.getElementById('title').value
     let description = document.getElementById('description').value
+    if (title == '' || description == '' || title.length < 3 || description.length < 3) {
+        alert('Título e/ou descrição vazios ou muito curtos, por favor usar pelo menos 3 caracteres de texto para cada!')
+    } else {
+        let newPost = {title, description}
 
-    let newPost = {title, description}
-
-    const options = {method: 'POST',
-                   headers: new Headers({'content-type': 'application/json'}),
-                   body: JSON.stringify(newPost)}
-
-    fetch('http://192.168.0.16:3000/api/new', options).then(res => {
-        console.log(options)
-        updatePosts()
-    })
+        const options = {method: 'POST',
+                       headers: new Headers({'content-type': 'application/json'}),
+                       body: JSON.stringify(newPost)}
+    
+        fetch('http://192.168.0.16:3000/api/new', options).then(res => {
+            console.log(res)
+            updatePosts()
+        })
+    }
 }
+
+function deletePost() {
+    let postId = localStorage.getItem('tempId')
+    let obj = {id:postId}
+    let options = {method: 'DELETE',
+                   headers: new Headers({'content-type':'application/json'}),
+                   body: JSON.stringify(obj)}
+    fetch(`http://192.168.0.16:3000/api/del`, options).then(res => {
+        console.log(res)
+    }).catch(err => console.log(err))
+    clearTemp()
+    updatePosts()
+}
+
+function tempId(element) {
+    let postId = element.parentElement.parentElement.id
+    localStorage.setItem('tempId', postId)
+}
+
+const clearTemp = () => localStorage.clear()

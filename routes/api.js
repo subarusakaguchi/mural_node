@@ -19,8 +19,8 @@ router.post('/new', express.json(), (req, res) => {
     res.send('Post adicionado')
 })
 
-router.delete('/del/:id', (req, res) => {
-    posts.deletePost(req.params.id)
+router.delete('/del', express.json(), (req, res) => {
+    posts.deletePost(req.body.id)
     res.send('Post apagado')
 })
 
